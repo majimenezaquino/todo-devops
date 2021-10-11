@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const mongo_url = process.env.MONGO_URL || "mongodb://localhost/todo-app"
 module.exports = async () => {
     try {
         const connectionParams = {
@@ -8,7 +8,8 @@ module.exports = async () => {
             useUnifiedTopology: true,
         };
         await mongoose.connect(
-            "mongodb://localhost/todo-app",
+            mongo_url
+            ,
             connectionParams
         );
         console.log("Connected to database.");

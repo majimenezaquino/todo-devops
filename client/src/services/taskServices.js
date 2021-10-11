@@ -1,5 +1,5 @@
 import axios from "axios";
-const apiUrl = "http://localhost:8080/api/tasks";
+const apiUrl =process.env.BACKENDURL || "http://localhost:4040/api/tasks";
 
 export function getTasks() {
     return axios.get(apiUrl);

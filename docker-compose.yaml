@@ -1,0 +1,26 @@
+version: '3.7'
+services:
+  backeend:
+    restart: always
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    environment:
+      - MONGO_URL=mongodb://mongo/todo-app
+      - PORT=3000
+    ports:
+      - 4040:3000
+  mongo:
+    image: mongo
+    volumes:
+      - mongodb:/data/db
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    environment:
+      - BACKENDURL=http://backeend:3000/api/tasks
+    ports:
+      - 8080:3000
+volumes:
+ mongodb:
